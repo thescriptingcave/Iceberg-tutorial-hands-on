@@ -20,7 +20,7 @@
 # Spark + Iceberg Quickstart Image
 
 This is a docker compose environment to quickly get up and running with a Spark environment and a local REST
-catalog, and MinIO as a storage backend.
+catalog, and [RustFS](https://github.com/rustfs/rustfs) (an S3-compatible object store) as a storage backend.
 
 **note**: If you don't have docker installed, you can head over to the [Get Docker](https://docs.docker.com/get-docker/)
 page for installation instructions.
@@ -32,6 +32,10 @@ docker-compose up
 ```
 
 The notebook server will then be available at http://localhost:8888
+
+All ports are published on `127.0.0.1` only. The RustFS console is at http://localhost:9001 and the REST catalog at
+http://localhost:8181. The default credentials are `admin` / `password`; override them with the `S3_ACCESS_KEY` and
+`S3_SECRET_KEY` environment variables (or a `.env` file).
 
 While the notebook server is running, you can use any of the following commands if you prefer to use spark-shell, spark-sql, or pyspark.
 ```
