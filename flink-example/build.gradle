@@ -35,9 +35,6 @@ compileJava {
 repositories {
   mavenCentral()
   maven {
-    url "https://tabular-repository-public.s3.amazonaws.com/releases"
-  }
-  maven {
     url "https://repository.apache.org/content/repositories/snapshots"
   }
 }
@@ -47,7 +44,7 @@ ext {
   flinkShortVersion = "1.16"
   scalaVersion = "2.12"
   icebergVersion = "1.2.1"
-  tabularVersion = "1.4.3"
+  awsSdkVersion = "2.20.18"
   hadoopVersion = "3.3.2"
 }
 
@@ -64,7 +61,9 @@ configurations {
 dependencies {
   flinkShadowJar "org.apache.iceberg:iceberg-flink-runtime-${flinkShortVersion}:${icebergVersion}"
   flinkShadowJar "org.apache.hadoop:hadoop-common:${hadoopVersion}" // needed by Iceberg Flink
-  flinkShadowJar "io.tabular:tabular-client:${tabularVersion}"
+  flinkShadowJar "org.apache.iceberg:iceberg-aws:${icebergVersion}"
+  flinkShadowJar "software.amazon.awssdk:bundle:${awsSdkVersion}"
+  flinkShadowJar "software.amazon.awssdk:url-connection-client:${awsSdkVersion}"
   flinkShadowJar group: 'com.github.javafaker', name: 'javafaker', version: '1.0.2'
 
   // these are provided by Flink...
@@ -73,7 +72,9 @@ dependencies {
   implementation "org.apache.flink:flink-table-runtime:${flinkVersion}"
   implementation "org.apache.iceberg:iceberg-flink-runtime-${flinkShortVersion}:${icebergVersion}"
   implementation "org.apache.hadoop:hadoop-common:${hadoopVersion}" // needed by Iceberg Flink
-  implementation "io.tabular:tabular-client:${tabularVersion}"
+  implementation "org.apache.iceberg:iceberg-aws:${icebergVersion}"
+  implementation "software.amazon.awssdk:bundle:${awsSdkVersion}"
+  implementation "software.amazon.awssdk:url-connection-client:${awsSdkVersion}"
   implementation group: 'com.github.javafaker', name: 'javafaker', version: '1.0.2'
 }
 
